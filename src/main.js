@@ -22,15 +22,13 @@ let config = {
     render:{
         pixelArt: true
     },
-    scene: [ Load, Title, Play ]
+    scene: [ Load, Title, LevelOne ]
 }
 
 let game = new Phaser.Game(config)
 
 //globals
-let keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A)
-let keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D)
-let spaceKey = keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)
+let spaceKey, keyA, keyD
 let width = game.config.width
 let height = game.config.height
 let playerSpeed = 50

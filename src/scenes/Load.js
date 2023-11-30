@@ -3,11 +3,13 @@ class Load extends Phaser.Scene{
         super('loadscene')
     }
 
-    create(){
-        
+    preload(){
+        this.load.image('player', './assets/image/Booford.png')
+        this.load.image('tilesetImage', './assets/image/tileset.png')
+        this.load.tilemapTiledJSON('tilemapJSON', './assets/image/protomap.json')
     }
 
-    update(){
-        
+    create(){
+        this.scene.start('titlescene')
     }
 }
