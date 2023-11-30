@@ -7,32 +7,44 @@ class LevelOne extends Phaser.Scene{
         //add input
 
         //create map
-        const map = this.add.tilemap('tilemapJSON')
-        const tileset = map.addTilesetImage('tileset', 'tilesetImage')
+        this.map = this.add.tilemap('tilemap1JSON')
+        const tileset = this.map.addTilesetImage('tileset', 'tilesetImage')
 
         //layers
-        const bgLayer = map.createLayer('Background', tileset, 0, 0)
-        const platLayer = map.createLayer('Platforms', tileset, 0, 0)
-        const endLayer = map.createLayer('Endlevel', tileset, 0, 0)
-        const deathLayer = map.createLayer('Death', tileset, 0, 0)
+        this.bgLayer = this.map.createLayer('Background', tileset, 0, 0)
+        this.platLayer = this.map.createLayer('Platforms', tileset, 0, 0)
+        this.endLayer = this.map.createLayer('Endlevel', tileset, 0, 0)
+        this.deathLayer = this.map.createLayer('Death', tileset, 0, 0)
 
         //add player
-        this.player = new Player(this, game.config.width/2, game.config.height/2)
+        this.player = new Player(this, 10, game.config.height/1.2)
         this.player.create()
 
-        //edit tilelayer properties
-        platLayer.setCollisionByProperty({
+        // //edit tilelayer properties
+        this.platLayer.setCollisionByProperty({
             collides: true
         })
-        deathLayer.setCollisionByProperty({
+        this.deathLayer.setCollisionByProperty({
             collides: true
+        })
+
+        this.endLayer.setCollisionByProperty({
+            collides: true
+        })
+
+        this.physics.add.collider(this.player, this.platLayer)
+        this.physics.add.collider(this.player, this.deathLayer, () => {
+            this.scene.restart()
+        })
+        this.physics.add.collider(this.player, this.endLayer, () => {
+            this.scene.start('leveltwo')
         })
 
         //camera settings
-        this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels)
+        this.cameras.main.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels)
         this.cameras.main.startFollow(this.player, false, 0.5, 0.5)
         this.cameras.main.setZoom(2, 2)
-        this.physics.world.setBounds(0, 0, map.widthInPixels, map.heightInPixels)
+        this.physics.world.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels)
     }
 
     update(){

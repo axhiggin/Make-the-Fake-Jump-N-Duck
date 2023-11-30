@@ -6,7 +6,7 @@ class Load extends Phaser.Scene{
     preload(){
         this.load.image('player', './assets/image/Booford.png')
         this.load.image('tilesetImage', './assets/image/tileset.png')
-        this.load.tilemapTiledJSON('tilemapJSON', './assets/image/protomap.json')
+        this.load.tilemapTiledJSON('tilemap1JSON', './assets/image/levelone.json')
     }
 
     create(){

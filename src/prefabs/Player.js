@@ -7,7 +7,7 @@ class Player extends Phaser.Physics.Arcade.Sprite{
 
         this.body.setCollideWorldBounds(true)
         this.setDragX(2000)
-        this.setMaxVelocity(300)
+        this.setMaxVelocity(300, 320)
         this.setBounce(0)
     }
 
@@ -24,7 +24,7 @@ class Player extends Phaser.Physics.Arcade.Sprite{
         if(keyD.isDown){
             this.body.velocity.x += 30
         }
-        if(Phaser.Input.Keyboard.JustDown(spaceKey)){
+        if(this.body.velocity.y == 0 && Phaser.Input.Keyboard.JustDown(spaceKey)){
             this.body.velocity.y -= 1000
         }
     }
