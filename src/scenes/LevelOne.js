@@ -49,7 +49,7 @@ class LevelOne extends Phaser.Scene{
         //camera settings
         this.cameras.main.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels)
         this.cameras.main.startFollow(this.player, false, 0.5, 0.5)
-        // this.cameras.main.setZoom(2, 2)
+        this.cameras.main.setZoom(2, 2)
         this.physics.world.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels)
     }
 
