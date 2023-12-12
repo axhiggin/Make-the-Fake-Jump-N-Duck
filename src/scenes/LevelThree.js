@@ -22,12 +22,19 @@ class LevelThree extends Phaser.Scene{
         this.player.create()
         
         //add enemies
-        this.enemy1 = new Enemy(this, 375, 50, 'bird', 375, 150)
-        this.enemy2 = new Enemy(this, 570, 208, 'tomato', 650, 208)
-        this.enemy3 = new Enemy(this, 1028, 190, 'bird', 1028, 50)
+        this.enemy1 = new Enemy(this, 360, 1050, 'bird', 360, 950)
+        this.enemy2 = new Enemy(this, 1080, 860, 'bird', 1080, 780)
+        this.enemy3 = new Enemy(this, 310, 700, 'bird', 310, 800)
+        this.enemy4 = new Enemy(this, 180, 286, 'bird', 180, 386)
+        this.enemy5 = new Enemy(this, 365, 1104, 'tomato', 535, 1104)
+        this.enemy6 = new Enemy(this, 543, 944, 'tomato', 625, 944)
+        this.enemy7 = new Enemy(this, 595, 528, 'tomato', 625, 528)
+        this.enemy8 = new Enemy(this, 520, 272, 'tomato', 550, 272)
 
         //add arrow signs
         this.add.sprite(695, 944, 'rightarrow')
+        this.add.sprite(225, 272, 'rightarrow')
+        this.add.sprite(558, 528, 'downarrow')
 
         // //edit tilelayer properties
         this.platLayer.setCollisionByProperty({
@@ -48,8 +55,8 @@ class LevelThree extends Phaser.Scene{
             this.scene.restart()
         })
         this.physics.add.collider(this.player, this.endLayer, () => {
-            this.sound.play('levelup', {volume: 0.1})
-            this.scene.start('levelone')
+            this.sound.play('yay', {volume: 0.1})
+            this.scene.start('winscene')
         })
         
 
@@ -66,7 +73,13 @@ class LevelThree extends Phaser.Scene{
         this.enemy1.update()
         this.enemy2.update()
         this.enemy3.update()
-        console.log(this.player.x, this.player.y)
+        this.enemy4.update()
+        this.enemy5.update()
+        this.enemy6.update()
+        this.enemy7.update()
+        this.enemy8.update()
+
+        // console.log(this.player.x, this.player.y)
 
         if(keyR.isDown){
             this.scene.restart()

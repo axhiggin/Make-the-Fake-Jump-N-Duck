@@ -14,7 +14,7 @@ let config = {
     physics: {
         default: 'arcade',
         arcade: {
-            debug: true,
+            // debug: true,
             gravity: {
                 x: 0,
                 y: 500
@@ -24,7 +24,7 @@ let config = {
     render:{
         pixelArt: true
     },
-    scene: [ Load, Title, LevelOne, LevelTwo, LevelThree, Credits ]
+    scene: [ Load, Title, LevelOne, LevelTwo, LevelThree, Credits, YouWon ]
 }
 
 let game = new Phaser.Game(config)

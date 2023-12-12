@@ -46,7 +46,7 @@ class LevelTwo extends Phaser.Scene{
         })
         this.physics.add.collider(this.player, this.endLayer, () => {
             this.sound.play('levelup', {volume: 0.1})
-            this.scene.start('levelone')
+            this.scene.start('levelthree')
         })
         
 
@@ -63,7 +63,7 @@ class LevelTwo extends Phaser.Scene{
         this.enemy1.update()
         this.enemy2.update()
         this.enemy3.update()
-        console.log(this.player.x, this.player.y)
+        // console.log(this.player.x, this.player.y)
 
         if(keyR.isDown){
             this.scene.restart()
