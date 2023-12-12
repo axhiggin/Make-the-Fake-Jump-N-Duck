@@ -4,17 +4,21 @@ class Title extends Phaser.Scene{
     }
 
     create(){
-        spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)
-        this.add.text(game.config.width/3, game.config.height/2, 'press space to start', {
-            align: 'left',
-            fontSize: '20px',
-            color: 0x000001
-        })
+        game.bgm = game.sound.add('bgm', {loop: true, volume: 0.05})
+        game.bgm.play()
+
+        this.add.sprite(game.config.width/2, 140, 'title')
+
+        this.startbutton = this.add.sprite(game.config.width/2, game.config.height/1.9, 'startbutton')
+        .setInteractive()
+        .on('pointerdown', () => this.scene.start('levelone'))
+        
+        this.creditbutton = this.add.sprite(game.config.width/2, game.config.height/1.3, 'creditbutton')
+        .setInteractive()
+        .on('pointerdown', () => this.scene.start('creditscene'))
     }
 
     update(){
-        if (Phaser.Input.Keyboard.JustDown(spaceKey)){
-            this.scene.start('levelone')
-        }
+        
     }
 }

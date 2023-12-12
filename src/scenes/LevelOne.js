@@ -4,6 +4,12 @@ class LevelOne extends Phaser.Scene{
     }
 
     create(){
+        //prevent player from moving during countdown timer
+        this.canMove = false
+
+        //add keyboard input for reset
+        keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R)
+
         //create map
         this.map = this.add.tilemap('tilemap1JSON')
         const tileset = this.map.addTilesetImage('tileset', 'tilesetImage')
@@ -49,15 +55,46 @@ class LevelOne extends Phaser.Scene{
         //camera settings
         this.cameras.main.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels)
         this.cameras.main.startFollow(this.player, false, 0.5, 0.5)
-        this.cameras.main.setZoom(2, 2)
+        this.cameras.main.setZoom(3, 3)
         this.physics.world.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels)
+
+        //absolutely horrendous countdown code (please ignore)
+        this.countdownConfig = {fontSize: '100px', color: 0x000001}
+
+        this.three = this.add.text(120, game.config.height/1.3, '3', this.countdownConfig)
+        this.sound.play('coin', {volume: 0.1})
+        this.countdown = this.time.delayedCall(1000, () => {
+            this.three.destroy()    
+            this.two = this.add.text(120, game.config.height/1.3, '2', this.countdownConfig)
+            this.sound.play('coin', {volume: 0.1})
+            this.countdown = this.time.delayedCall(1000, () => {
+                this.two.destroy()
+                this.one = this.add.text(120, game.config.height/1.3, '1', this.countdownConfig)
+                this.sound.play('coin', {volume: 0.1})
+                this.countdown = this.time.delayedCall(1000, () => {
+                    this.one.destroy()
+                    this.start = this.add.text(10, game.config.height/1.3, 'START', this.countdownConfig)
+                    //let the player move once the countdown is done
+                    this.canMove = true
+                    this.countdown = this.time.delayedCall(1000, () => {
+                        this.start.destroy()
+                    })
+                })
+            })
+        })
     }
 
     update(){
         //call update on the instantiated sprites
-        this.player.update()
+        if(this.canMove){
+            this.player.update()
+        }
         this.enemy1.update()
         this.enemy2.update()
         // console.log(this.player.x, this.player.y)
+
+        if(keyR.isDown){
+            this.scene.restart()
+        }
     }
 }

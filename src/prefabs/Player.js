@@ -6,10 +6,15 @@ class Player extends Phaser.Physics.Arcade.Sprite{
         scene.add.existing(this)
         scene.physics.add.existing(this)
 
+        this.body.setSize(15 , 32).setOffset(7, 0)
         this.body.setCollideWorldBounds(true)
+        //maybe change
+        this.body.checkCollision.up = false
+
         this.setDragX(2000)
         this.setMaxVelocity(300, 320)
         this.setBounce(0)
+        this.depth = 100
     }
 
     create(){
@@ -22,10 +27,10 @@ class Player extends Phaser.Physics.Arcade.Sprite{
     update(){
         //make input do something
         if(keyA.isDown){
-            this.body.velocity.x -= 30
+            this.body.velocity.x -= 20
         }
         if(keyD.isDown){
-            this.body.velocity.x += 30
+            this.body.velocity.x += 20
         }
         //JUMP!
         if(this.body.velocity.y == 0 && Phaser.Input.Keyboard.JustDown(spaceKey)){
