@@ -4,7 +4,8 @@ class Load extends Phaser.Scene{
     }
 
     preload(){
-        this.load.image('player', './assets/image/Booford.png')
+        this.load.spritesheet('player', './assets/image/Buford.png', {frameWidth: 32, frameHeight: 32})
+
         this.load.image('tilesetImage', './assets/image/tileset.png')
         this.load.image('tomato', './assets/image/Tomtato.png')
         this.load.image('bird', './assets/image/Bird.png')
@@ -14,7 +15,7 @@ class Load extends Phaser.Scene{
         this.load.image('rightarrow', './assets/image/rightarrow.png')
         this.load.image('downarrow', './assets/image/downarrow.png')
         this.load.image('backtomenu', './assets/image/backtomenu.png')
-        
+
         this.load.audio('jump', './assets/audio/jump.mp3')
         this.load.audio('death', './assets/audio/womp-womp.mp3')
         this.load.audio('levelup', './assets/audio/kaching.mp3')
@@ -28,6 +29,7 @@ class Load extends Phaser.Scene{
     }
 
     create(){
+        //play music
         game.bgm = game.sound.add('bgm', {loop: true, volume: 0.05})
         game.bgm.play()
         this.scene.start('titlescene')
